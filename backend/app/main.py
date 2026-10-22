@@ -257,6 +257,7 @@ def serialize_order(order: Order, include_verification_token: bool = False) -> D
 # 1. HEALTH & SYSTEM INFO
 # =============================================================================
 
+@app.get("/health")
 @app.get("/api/health")
 def health_check(db: Session = Depends(get_db)):
     cat_count = db.query(Category).count()

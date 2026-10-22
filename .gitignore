@@ -36,3 +36,7 @@ frontend/.env.local
 
 # Deployment helper scripts
 push_to_github.bat
+
+gh.exe
+
+github_login.bat
