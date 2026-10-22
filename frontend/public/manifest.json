@@ -1,0 +1,16 @@
+{
+  "name": "CRAVORA — Pizza & More",
+  "short_name": "CRAVORA",
+  "description": "Big Flavour. Bold Cravings. Premium Pakistani Pizza & Fast-Food Commerce Platform.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFBF5",
+  "theme_color": "#D92B2B",
+  "icons": [
+    {
+      "src": "/cravora-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

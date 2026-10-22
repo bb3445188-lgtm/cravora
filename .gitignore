@@ -1,0 +1,35 @@
+# Virtual environments
+.venv/
+backend/.venv/
+venv/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+*.sqlite3
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/tsconfig.tsbuildinfo
+
+# Local binaries and downloads
+mingit/
+cloudflared.exe
+ngrok.exe
+ngrok.zip
+git-installer.exe
+
+# Local databases
+cravora.db
+backend/cravora.db
+
+# Environment variables
+.env
+backend/.env
+frontend/.env.local

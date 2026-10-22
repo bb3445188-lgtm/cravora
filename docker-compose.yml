@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: cravora-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: cravora
+      POSTGRES_PASSWORD: cravora_secret
+      POSTGRES_DB: cravora
+    ports:
+      - "5432:5432"
+    volumes:
+      - cravora_pgdata:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cravora -d cravora"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: cravora-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql+psycopg://cravora:cravora_secret@postgres:5432/cravora"
+      JWT_SECRET_KEY: "${JWT_SECRET_KEY:-cravora-production-jwt-secret-key-2026}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
+      SAFEPAY_WEBHOOK_SECRET: "${SAFEPAY_WEBHOOK_SECRET:-cravora-webhook-hmac-secret-dev}"
+      CORS_ORIGINS: "http://localhost:5173,http://localhost:3000"
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: cravora-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      VITE_API_BASE_URL: "http://localhost:8000"
+    ports:
+      - "5173:5173"
+
+volumes:
+  cravora_pgdata:

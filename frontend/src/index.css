@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #FFF8EF;
+    color: #241D19;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Manrope', sans-serif;
+  }
+
+  *:focus-visible {
+    outline: 2px solid #F26A0A;
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Custom subtle scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FFF8EF;
+}
+::-webkit-scrollbar-thumb {
+  background: #D9CEC2;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F26A0A;
+}
+
+/* Keep Leaflet map layers below sticky modals and drawers */
+.leaflet-container {
+  z-index: 10 !important;
+  font-family: 'Inter', sans-serif !important;
+}
