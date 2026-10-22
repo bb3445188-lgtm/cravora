@@ -10,10 +10,14 @@ services:
         fromDatabase:
           name: cravora-db
           property: connectionString
+      - key: JWT_SECRET_KEY
+        generateValue: true
       - key: SECRET_KEY
         generateValue: true
       - key: ENVIRONMENT
         value: production
+      - key: CORS_ORIGINS
+        value: "*"
       - key: ALLOWED_ORIGINS
         value: "*"
 
